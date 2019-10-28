@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productpage-v1
+  labels:
+    app: productpage
+    version: v1
+  namespace: demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: productpage
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: productpage
+        version: v1
+    spec:
+      serviceAccountName: bookinfo-productpage
+      containers:
+      - name: productpage
+        image: rancherlbacr.azurecr.io/productpage:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
+      imagePullSecrets:
+      - name: rancherlbacr
