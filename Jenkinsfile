@@ -26,7 +26,9 @@ pipeline {
 
     stage('trigger deployment') {
         // trigger deployment
-        build 'bookinfo-productpage-deployment'
+        steps {
+            build 'bookinfo-productpage-deployment'
+        }
     }
   }
 }
